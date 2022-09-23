@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv_first_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-black"
+        android:rotation="-20"
+        android:rotationX="0"
+        android:rotationY="0"
+        android:text="@string/app_first_title"
+        android:textColor="@color/color_title_paper"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/app_first_title" />
+
+
+    <TextView
+        android:id="@+id/tv_second_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:rotation="-20"
+        android:rotationX="0"
+        android:text="@string/app_second_title"
+        android:textColor="@color/color_title_scissor"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_first_title"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@string/app_second_title" />
+
+    <TextView
+        android:id="@+id/tv_third_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:rotation="-20"
+        android:rotationX="0"
+        android:rotationY="0"
+        android:text="@string/app_third_title"
+        android:textColor="@color/color_title_rock"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_second_title"
+        tools:text="@string/app_third_title" />
+
+    <LinearLayout
+        android:id="@+id/ll_player_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/iv_refresh"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_third_title">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_player1_rock"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="16dp"
+            android:src="@drawable/batu"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_player1_paper"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="16dp"
+            android:src="@drawable/kertas"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_player1_scissor"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="16dp"
+            android:src="@drawable/gunting"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_player_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/iv_refresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_third_title">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_player2_rock"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="16dp"
+            android:src="@drawable/batu"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_player2_paper"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="16dp"
+            android:src="@drawable/kertas"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+
+            android:id="@+id/iv_player2_scissor"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="16dp"
+            android:src="@drawable/gunting"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical|center"
+        android:rotation="-20"
+        android:rotationX="0"
+        android:rotationY="0"
+        android:text="@string/vs"
+        android:textColor="@color/red"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/iv_refresh"
+        app:layout_constraintEnd_toStartOf="@+id/ll_player_2"
+        app:layout_constraintStart_toEndOf="@+id/ll_player_1"
+        app:layout_constraintTop_toBottomOf="@id/tv_third_title"
+        app:layout_constraintVertical_bias="0.514" />
+
+    <ImageView
+        android:id="@+id/iv_refresh"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:padding="16dp"
+        android:src="@drawable/refresh"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_text_player_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="@string/player_left"
+        android:textColor="@color/design_default_color_secondary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/ll_player_1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_text_player_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:text="@string/player_right"
+        android:textColor="@color/design_default_color_secondary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/ll_player_2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

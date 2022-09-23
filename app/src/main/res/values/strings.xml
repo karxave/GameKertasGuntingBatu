@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">GameKertasGuntingBatu</string>
+    <string name="app_title">Kertas Gunting Batu</string>
+    <string name="app_first_title">Kertas</string>
+    <string name="app_second_title">Gunting</string>
+    <string name="app_third_title">Batu</string>
+    <string name="draw">DRAW</string>
+    <string name="vs">V S</string>
+    <string name="player1_win">Pemain 1 \n Menang!</string>
+    <string name="player2_win">Pemain 2 \n Menang!</string>
+    <string name="player_com_win">C O M \n Menang!</string>
+    <string name="player_left">Pemain 1</string>
+    <string name="player_right">C O M</string>
+</resources>
