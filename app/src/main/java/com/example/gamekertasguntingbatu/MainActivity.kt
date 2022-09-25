@@ -1,6 +1,6 @@
 package com.example.gamekertasguntingbatu
 
-import android.content.ContentValues.TAG
+
 import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Build
@@ -14,11 +14,11 @@ import android.view.WindowInsetsController
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.view.isVisible
-import com.example.gamekertasguntingbatu.R.color.*
 import com.example.gamekertasguntingbatu.databinding.ActivityMainBinding
 import kotlin.random.Random
 
 private lateinit var binding: ActivityMainBinding
+
 
 var timer = 1
 var playerChoice = 0
@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         whichButtonClick()
 
-
     }
 
 
@@ -44,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         binding.ivPlayer1Rock.setOnClickListener {
             Log.d(TAG, "initButton: Pemain 1 Click BATU")
 
+            binding.ivPlayer1Rock.isClickable = false
 
             playerChoice = 1
 
@@ -51,14 +51,13 @@ class MainActivity : AppCompatActivity() {
 
             computerRandom()
 
-//            playSound()
-
 
         }
 
         binding.ivPlayer1Paper.setOnClickListener {
             Log.d(TAG, "initButton: Pemain 1 Click KERTAS")
 
+            binding.ivPlayer1Paper.isClickable = false
 
             playerChoice = 2
 
@@ -66,10 +65,13 @@ class MainActivity : AppCompatActivity() {
 
             computerRandom()
 
+
         }
 
         binding.ivPlayer1Scissor.setOnClickListener {
             Log.d(TAG, "initButton: Pemain 1 Click GUNTING")
+
+            binding.ivPlayer1Scissor.isClickable = false
 
 
             playerChoice = 3
@@ -77,6 +79,7 @@ class MainActivity : AppCompatActivity() {
             showPicScissorPlayer1()
 
             computerRandom()
+
 
         }
 
@@ -86,21 +89,23 @@ class MainActivity : AppCompatActivity() {
 
             setRestart()
 
-            var clkRotate = AnimationUtils.loadAnimation(this, R.anim.rotate_clockwise)
+            val clkRotate = AnimationUtils.loadAnimation(this, R.anim.rotate_clockwise)
 
             binding.ivRefresh.startAnimation(clkRotate)
+
+            playSoundRefresh()
         }
     }
 
 
-
     private fun setTextDraw() {
-        binding.tvResult.text = " D R A W !"
+        binding.tvResult.text = getString(R.string.textHasilDraw)
         with(binding) {
             tvResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50F)
             tvResult.setTextColor(Color.parseColor("#FFFFFFFF"))
             tvResult.setBackgroundColor(Color.parseColor("#0070c0"))
-        }    }
+        }
+    }
 
     private fun setRestart() {
         timer = 1
@@ -109,12 +114,17 @@ class MainActivity : AppCompatActivity() {
 
         setTextVs()
 
-        binding.ivPlayer1Paper.isVisible = true
-        binding.ivPlayer1Rock.isVisible = true
-        binding.ivPlayer1Scissor.isVisible = true
-        binding.ivPlayer1Paper.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-        binding.ivPlayer1Rock.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-        binding.ivPlayer1Scissor.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+        reSetPlayer1Paper()
+
+        reSetPlayer1Rock()
+
+        reSetPlayer1Scissor()
+
+        reSetPlayerCom()
+
+    }
+
+    private fun reSetPlayerCom() {
         binding.ivPlayer2Rock.isVisible = true
         binding.ivPlayer2Paper.isVisible = true
         binding.ivPlayer2Scissor.isVisible = true
@@ -123,8 +133,29 @@ class MainActivity : AppCompatActivity() {
         binding.ivPlayer2Scissor.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
     }
 
+    private fun reSetPlayer1Scissor() {
+        binding.ivPlayer1Scissor.isVisible = true
+        binding.ivPlayer1Scissor.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+        binding.ivPlayer1Scissor.isClickable = true
+
+    }
+
+    private fun reSetPlayer1Rock() {
+        binding.ivPlayer1Rock.isVisible = true
+        binding.ivPlayer1Rock.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+        binding.ivPlayer1Rock.isClickable = true
+    }
+
+    private fun reSetPlayer1Paper() {
+        binding.ivPlayer1Paper.isVisible = true
+        binding.ivPlayer1Paper.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+        binding.ivPlayer1Paper.isClickable = true
+    }
+
     private fun setTextPlayerComWin() {
-        binding.tvResult.text = "C O M \n Menang!"
+        binding.tvResult.text = buildString {
+            append("C O M \n Menang!")
+        }
         with(binding) {
             tvResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50F)
             tvResult.setTextColor(Color.parseColor("#FFFFFFFF"))
@@ -133,7 +164,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setTextPlayer1Win() {
-        binding.tvResult.text = "Pemain 1 \n Menang!"
+        binding.tvResult.text = buildString {
+            append("Pemain 1 \n Menang!")
+        }
         with(binding) {
             tvResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50F)
             tvResult.setTextColor(Color.parseColor("#FFFFFFFF"))
@@ -143,7 +176,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setTextVs() {
-        binding.tvResult.text = "V S"
+        binding.tvResult.text = getString(R.string.textVS)
         binding.tvResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50F)
         binding.tvResult.setTextColor(Color.parseColor("#FA0202"))
         binding.tvResult.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
@@ -183,17 +216,23 @@ class MainActivity : AppCompatActivity() {
     private fun comparePlayerVsCom() {
         if ((playerChoice == 3) && (computerChoice == 3)) {
             setTextDraw()
+            playSoundDraw()
 
         } else if ((playerChoice == 2) && (computerChoice == 2)) {
             setTextDraw()
+            playSoundDraw()
+
 
         } else if ((playerChoice == 1) && (computerChoice == 1)) {
             setTextDraw()
+            playSoundDraw()
+
         }
-  //         GUNTING VS KERTAS : GUNTING WIN
+        //         GUNTING VS KERTAS : GUNTING WIN
         else if ((playerChoice == 3) && (computerChoice == 2)) {
 
             setTextPlayer1Win()
+            playSoundPlayerWin()
 
         }
 //        GUNTING VS BATU : BATU WIN
@@ -201,44 +240,69 @@ class MainActivity : AppCompatActivity() {
         else if ((playerChoice == 3) && (computerChoice == 1)) {
 
             setTextPlayerComWin()
+            playSoundComWin()
 
         }
 //        BATU VS GUNTING
         else if ((playerChoice == 1) && (computerChoice == 3)) {
             setTextPlayer1Win()
+            playSoundPlayerWin()
 
         }
 //        BATU VS KERTAS : KERTAS MENANG
         else if ((playerChoice == 1) && (computerChoice == 2)) {
             setTextPlayerComWin()
+            playSoundComWin()
+
 
         }
 //        KERTAS VS GUNTING : GUNTING WIN
         else if ((playerChoice == 2) && (computerChoice == 3)) {
             setTextPlayerComWin()
+            playSoundComWin()
 
         }
 //        KERTAS VS BATU : kertas WIN
         else if ((playerChoice == 2) && (computerChoice == 1)) {
 
             setTextPlayer1Win()
+            playSoundPlayerWin()
 
         } else {
 //            Log.d("OUTPUT", "PLAYER CHOICE : ${playerChoice} + COM = $computerChoice")
             Toast.makeText(
                 this,
-                "wow PLAYER CHOICE : ${playerChoice} + COM = $computerChoice",
+                "wow PLAYER CHOICE : $playerChoice + COM = $computerChoice",
                 Toast.LENGTH_LONG
             )
                 .show()
 
+        }
     }
+
+    private fun playSoundDraw() {
+        val mediaPlayerRun: MediaPlayer = MediaPlayer.create(this, R.raw.sound_draw)
+
+        mediaPlayerRun.start()
     }
-//    private fun playSound() {
-//        val mediaPlayerRun : MediaPlayer = MediaPlayer.create(this, R.raw.sound_select)
-//
-//        mediaPlayerRun.start()
-//    }
+
+    private fun playSoundComWin() {
+        val mediaPlayerRun: MediaPlayer = MediaPlayer.create(this, R.raw.sound_com_win)
+
+        mediaPlayerRun.start()
+    }
+
+    private fun playSoundPlayerWin() {
+        val mediaPlayerRun: MediaPlayer = MediaPlayer.create(this, R.raw.sound_player_win)
+
+        mediaPlayerRun.start()
+    }
+
+    private fun playSoundRefresh() {
+        val mediaPlayerRun: MediaPlayer = MediaPlayer.create(this, R.raw.sound_select)
+
+        mediaPlayerRun.start()
+    }
 
 
     private fun showPicScissorPlayer2() {
@@ -288,7 +352,9 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             @Suppress("DEPRECATION")
-            mainActivity.window?.apply { decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN }
+            mainActivity.window?.apply {
+                decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+            }
         }
 
     }

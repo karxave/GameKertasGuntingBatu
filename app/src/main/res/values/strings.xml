@@ -11,4 +11,6 @@
     <string name="player_com_win">C O M \n Menang!</string>
     <string name="player_left">Pemain 1</string>
     <string name="player_right">C O M</string>
+    <string name="textHasilDraw">\ D R A W !\</string>
+    <string name="textVS">V S</string>
 </resources>
